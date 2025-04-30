@@ -36,7 +36,7 @@ This project provides two solutions for predicting credit defaults based on paym
     ```
  
 ## Requirements
- 
+ This part alone take some more amount of data and time to installation.
  - Python 3.8+  
    ```
    pandas>=1.5.0
@@ -102,12 +102,17 @@ This project provides two solutions for predicting credit defaults based on paym
  ```
  
  ### Notebooks
- 
- - **`EDA.ipynb`**: In-depth EDA with visualizations and statistical summaries.  
+ - **`EDA.ipynb`**: In-depth EDA with visualizations and statistical summaries.
+Kindly get into the Data Analysis to find the insights extracted from the data 
 
  ### Client dashboard
  - Execute the model once.
  - Enter a Client ID and click Show Data to see both the payment‐history plots and the default prediction.
+
+### Usage
+ ```bash
+ streamlit run client_dashboard.py
+ ```
  
  ## Future Enhancements
  - **Dynamic column handling**: Improve to handle the columns dynamically instead of selecting and fitting in input X.
