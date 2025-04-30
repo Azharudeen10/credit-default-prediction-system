@@ -7,6 +7,7 @@ This project provides two solutions for predicting credit defaults based on paym
  ```
  ├── EDA.ipynb # Exploratory Data Analysis notebook
  ├── requirements.txt # Python dependencies
+ ├── client_dashboard.py # Data visualization client wise
  ├── solution_1/ # Monolithic solution
  │ └── app.py # Streamlit application (all-in-one)
  └── solution_2/ # Modular solution
@@ -103,7 +104,10 @@ This project provides two solutions for predicting credit defaults based on paym
  ### Notebooks
  
  - **`EDA.ipynb`**: In-depth EDA with visualizations and statistical summaries.  
- 
+
+ ### Client dashboard
+ - Execute the model once.
+ - Enter a Client ID and click Show Data to see both the payment‐history plots and the default prediction.
  
  ## Future Enhancements
  - **Dynamic column handling**: Improve to handle the columns dynamically instead of selecting and fitting in input X.
