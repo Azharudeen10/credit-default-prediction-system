@@ -7,3 +7,4 @@ __pycache__/
 *.log
 default_predictions.csv
 test.py
+.venv
