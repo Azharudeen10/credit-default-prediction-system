@@ -42,7 +42,7 @@ This repository contains an end-to-end solution for predicting loan payment defa
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<username>/shopup_project.git
+   git clone https://github.com/Azharudeen10/shopup_project.git
    cd shopup_project
    ```
 2. Create and activate a virtual environment:
