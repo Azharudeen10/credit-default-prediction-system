@@ -1,42 +1,20 @@
-# Payment Default Prediction
+# Credit Default Prediction System
 
-This repository contains an end-to-end solution for predicting loan payment defaults based on historical payment data. It includes data ingestion, preprocessing, feature engineering, model training and validation, and a scoring function for new data.
+This project provides two solutions for predicting credit defaults based on payment history data.
 
 ## Project Structure
 ```
-├── README.md                        # Project documentation (this file)
-├── data/                            # Raw and processed datasets
-│   ├── payment_default.csv         # Original default indicators (target variable)
-│   ├── payment_history.csv         # Original payment history data
-│   ├── defaults.pkl                # Serialized defaults DataFrame (optional caching)
-│   └── history.pkl                 # Serialized history DataFrame (optional caching)
-├── default_predictions.csv          # Sample output predictions
-├── models/                          # Saved trained model artifacts (e.g., .pkl files)
-├── solution_1/                      # First solution implementation (standalone)
-│   ├── app.py                       # CLI app for end-to-end scoring
-│   └── requirements.txt             # Dependencies for solution_1
-├── src/                             # Modular pipeline components
-│   ├── ingest_data.py               # CSV loading and normalization
-│   ├── feature_engineering.py       # Imputation and aggregation functions
-│   ├── train_model.py               # Model training, tuning, and evaluation
-│   └── score_model.py               # Scoring function for new data
-├── data_insights.ipynb              # Jupyter notebook for exploratory data analysis
-├── simple.ipynb                     # Simplified end-to-end demonstration notebook
-└── test.py                          # Quick local script for testing pipeline
+├── EDA.ipynb # Exploratory Data Analysis notebook
+├── requirements.txt # Python dependencies
+├── solution_1/ # Monolithic solution
+│ └── app.py # Streamlit application (all-in-one)
+└── solution_2/ # Modular solution
+├── app.py # Streamlit application (orchestrator)
+├── feature_engineering.py # Feature generation logic
+├── ingest_data.py # Data loading and validation
+├── score_model.py # Prediction scoring
+└── train_model.py # Model training and evaluation
 ```
-
-## Requirements
-
-- Python 3.8+  
-- See `solution_1/requirements.txt` or the project-wide `requirements.txt`:
-  ```
-  numpy>=1.21.0
-  pandas>=1.3.0
-  scipy>=1.7.0
-  scikit-learn>=1.0.0
-  xgboost>=1.6.0
-  tqdm>=4.60.0
-  ```
 
 ## Installation
 
@@ -55,44 +33,86 @@ This repository contains an end-to-end solution for predicting loan payment defa
    pip install -r requirements.txt
    ```
 
-## Usage
+## Requirements
 
-### CLI Application (`solution_1/app.py`)
+- Python 3.8+  
+  ```
+  pandas>=1.5.0
+  numpy>=1.23.0
+  streamlit>=1.18.0
+  scipy>=1.9.0
+  scikit-learn>=1.1.0
+  xgboost>=1.7.0
+  matplotlib>=3.5.0
+  seaborn>=0.12.0
+  ```
+   
+## Solution 1: Monolithic Approach
 
+A single-file implementation that handles:
+- Data loading
+- Feature engineering
+- Model training
+- Prediction generation
+
+### Features
+- Imputes missing payment status via nearest centroid
+- Calculates payment delay and paid ratio metrics
+- Aggregates per-client features
+- Trains multiple models (Logistic Regression, Decision Tree, Random Forest, XGBoost)
+- Provides performance metrics (Accuracy, AUC-ROC)
+- Generates downloadable predictions
+
+### Usage
 ```bash
-python solution_1/app.py \
-  --history data/payment_history.csv \
-  --defaults data/payment_default.csv \
-  --output default_predictions.csv
+streamlit run solution_1/app.py
 ```
 
-### Modular Scripts (`src/`)
+## Solution 2: Modular Approach
 
-1. **Ingestion**: Load and normalize data
-   ```bash
-   python -c "from src.ingest_data import load_data; load_data('data/payment_history.csv','data/payment_default.csv')"
-   ```
-2. **Feature Engineering**: Imputation & aggregation
-3. **Training**: Hyperparameter tuning and model evaluation
-4. **Scoring**: Generate predictions on new data
+A component-based architecture that separates concerns into distinct modules:
+Components
+
+**Data Ingestion** (ingest_data.py):
+- Loads and validates input CSVs
+- Normalizes column names
+
+**Feature Engineering** (feature_engineering.py):
+- Calculates payment patterns
+- Generates aggregated client features
+- Handles missing data
+
+**Model Training** (train_model.py):
+- Standardizes features
+- Performs hyperparameter tuning
+- Evaluates multiple models
+- Selects best performer
+
+**Prediction Scoring** (score_model.py):
+- Generates probability scores
+- Makes final predictions
+- Formats output
+
+### Usage
+```bash
+streamlit run solution_2/app.py
+```
 
 ### Notebooks
 
-- **`data_insights.ipynb`**: In-depth EDA with visualizations and statistical summaries.  
-- **`simple.ipynb`**: Concise demonstration of the full pipeline from ingestion to scoring.
+- **`EDA.ipynb`**: In-depth EDA with visualizations and statistical summaries.  
 
-## Logging & Progress
-
-- **Logging**: Uses Python's `logging` for informative, timestamped status updates.  
-- **Progress Bars**: `tqdm` provides spinners during hyperparameter tuning.
 
 ## Future Enhancements
-
+- **Dynamic column handling**: Improve to handle the columns dynamically instead of selecting and fitting in input X.
+- **Realtime prediction**: Using apache kafka to make consume the data and get the realtime prdiction instead of batch.
+- **Unittesting**: Create a unittesting file to catch the development mistakes
+- **Processing**: Implementation of pyspark to process very huge data files.
+- **Front-end**: Can improve the front-end in a better way.
 - **Model Deployment**: Wrap the pipeline into a web service (FastAPI/Streamlit).  
 - **Advanced Feature Engineering**: Include outlier detection, time-based features, and ensemble methods.  
 - **Monitoring**: Track prediction performance in production and implement model retraining triggers.
 
-## License
-
-Released under the MIT License. Contributions welcome!
+## Developer note
+Happy coding!
 
