@@ -7,10 +7,15 @@ This project provides two solutions for predicting credit defaults based on paym
  ```
  ├── EDA.ipynb # Exploratory Data Analysis notebook
  ├── requirements.txt # Python dependencies
+<<<<<<< Updated upstream
  ├── client_dashboard.py # Data visualization client wise
  ├── solution_1/ # Monolithic solution
+=======
+ ├── snaps # screensots of the project
+ ├── solution_2/ # Monolithic solution
+>>>>>>> Stashed changes
  │ └── app.py # Streamlit application (all-in-one)
- └── solution_2/ # Modular solution
+ └── solution_1/ # Modular solution
    ├── app.py # Streamlit application (orchestrator)
    ├── feature_engineering.py # Feature generation logic
    ├── ingest_data.py # Data loading and validation
