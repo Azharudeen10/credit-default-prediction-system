@@ -22,8 +22,8 @@ This project provides two solutions for predicting credit defaults based on paym
  
 1. Clone the repository:
     ```bash
-    git clone https://github.com/Azharudeen10/shopup_project.git
-    cd shopup_project
+    git clone https://github.com/Azharudeen10/credit-default-prediction-system/
+    cd credit-default-prediction-system
     ```
  2. Create and activate a virtual environment:
     ```bash
