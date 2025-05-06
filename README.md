@@ -6,6 +6,7 @@ This project provides two solutions for predicting credit defaults based on paym
  ## Project Structure
  ```
  ├── EDA.ipynb # Exploratory Data Analysis notebook
+ ├── client_dashboard.py #to see both the payment‐history plots and the default prediction.
  ├── requirements.txt # Python dependencies
  ├── snaps # screensots of the project
  ├── solution_2/ # Monolithic solution
